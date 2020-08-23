@@ -7,10 +7,14 @@ var cors=require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var pattern=require('./routes/pattern_word_route');
+var userword=require('./routes/user_word_routes');
+var word_id=require('./routes/word_id_router');
+var date_time_sort=require('./routes/words_sort_router');
 
 var user=require('./routes/user_route');
 var word=require('./routes/word_route');
-var userword=require('./routes/user-word_route');
+var rating=require('./routes/rating_route');
 
 var app = express();
 
@@ -28,8 +32,12 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/user',user);
-app.use('/userword',userword);
+app.use('/word_id',word_id);
 app.use('/word',word);
+app.use('/rating',rating);
+app.use('/pattern',pattern);
+app.use('/userword',userword);
+app.use('/sort',date_time_sort);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

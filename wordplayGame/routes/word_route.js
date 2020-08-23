@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get("/:id?", function (req, res, next) {
   if (req.params.id) {
-    word.getCntAvgByWorduser(req.params.id, function (err, rows) {
+    word.getWordById(req.params.id, function (err, rows) {
       if (err) {
         res.json(err);
       } else {
@@ -53,5 +53,10 @@ router.put("/",function(req,res,next){
     }
   })
 })
+
+
+
+
+
 
 module.exports = router;
