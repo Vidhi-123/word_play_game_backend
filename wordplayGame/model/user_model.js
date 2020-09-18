@@ -17,6 +17,10 @@ var user={
     updateUserType:function(type,id,callback)
     {
         return db.query("update user_table set type=? where user_id=?",[type,id],callback);
+    },
+    updateCoin:function(user_id,coins,callback)
+    {
+        return db.query("update user_table set coins=? where user_id=?",[coins,user_id],callback)
     }
 
 };

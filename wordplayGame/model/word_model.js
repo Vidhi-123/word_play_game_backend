@@ -20,7 +20,7 @@ var word={
         return db.query("delete from word_table where w_id=?",[id],callback);
     },
     getCntAvgByWorduser:function(id,callback){
-        return db.query("select word_table.*, user_table.*,COUNT(word_tbl.u_id)'Count_words',AVG(word_table.w_rating)'Avg_rating' from word_table JOIN user_table ON user_table.u_id=word_table.u_id where word_table.u_id=?",[id],callback);
+        return db.query("select avg(star) 'average_rating' from rating_table where  word_id in (SELECT word_id from user_word_table where user_id=?)",[id],callback);
     },
     updateword:function(w_rating,w_rating_count,w_id,callback){
         console.log(w_rating,w_rating_count,w_id);
@@ -46,6 +46,15 @@ var word={
     getWordsByRating:function(callback)
     {
         return db.query("select w.*,avg(r.star) from word_table w,rating_table r where w.word_id=r.word_id group by word_id order by avg(r.star) desc",callback);
+    },
+    getWordsByUserId:function(user_id,callback)
+    {
+        return db.query("select count(word_id) 'total_words' from user_word_table where user_id=? group by user_id",[user_id],callback)
+    },
+    getWordIdRatingByUserId:function(user_id,callback)
+    {
+        return db.query("select AVG(r.star) 'rating',w.word_id from rating_table r,user_word_table w where r.word_id=w.word_id and w.user_id=? GROUP by w.word_id ",[user_id],callback)
     }
+    
 };
 module.exports=word;

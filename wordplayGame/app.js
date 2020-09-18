@@ -11,6 +11,7 @@ var pattern=require('./routes/pattern_word_route');
 var userword=require('./routes/user_word_routes');
 var word_id=require('./routes/word_id_router');
 var date_time_sort=require('./routes/words_sort_router');
+var report=require('./routes/report_router');
 
 var user=require('./routes/user_route');
 var word=require('./routes/word_route');
@@ -35,6 +36,7 @@ app.use('/user',user);
 app.use('/word_id',word_id);
 app.use('/word',word);
 app.use('/rating',rating);
+app.use('/report',report);
 app.use('/pattern',pattern);
 app.use('/userword',userword);
 app.use('/sort',date_time_sort);

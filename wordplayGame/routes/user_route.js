@@ -76,4 +76,18 @@ router.put('/',function(req,res,next){
   })
 })
 
+
+
+router.put('/coin',function(req,res,next){
+  user.updateCoin(req.body.user_id,req.body.coins,function(err,rows){
+    if(err)
+    {
+      res.json(err);
+    }
+    else{
+      res.json(rows);
+    }
+  })
+})
+
 module.exports=router;

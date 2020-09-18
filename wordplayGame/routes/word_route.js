@@ -56,7 +56,42 @@ router.put("/",function(req,res,next){
 
 
 
+router.get('/avg/:id',function(req,res,next){
+    word.getCntAvgByWorduser(req.params.id,function(err,rows){
+        if(err)
+        {
+            res.json(err);
+        }
+        else
+        {
+            res.json(rows);
+        }
+    })
+});
 
 
 
-module.exports = router;
+
+router.get('/cnt/:id',function(req,res,next){
+  word.getWordsByUserId(req.params.id,function(err,rows){
+      if(err)
+      {
+          res.json(err);
+      }
+      else
+      {
+          res.json(rows);
+      }
+  })
+});
+
+
+
+module.exports=router;
+
+
+
+
+
+
+
