@@ -12,6 +12,8 @@ var userword=require('./routes/user_word_routes');
 var word_id=require('./routes/word_id_router');
 var date_time_sort=require('./routes/words_sort_router');
 var report=require('./routes/report_router');
+var user_admin=require('./routes/user_admin_route');
+var word_admin=require('./routes/word_router_admin');
 
 var user=require('./routes/user_route');
 var word=require('./routes/word_route');
@@ -39,6 +41,8 @@ app.use('/rating',rating);
 app.use('/report',report);
 app.use('/pattern',pattern);
 app.use('/userword',userword);
+app.use('/useradmin',user_admin);
+app.use('/wordadmin',word_admin);
 app.use('/sort',date_time_sort);
 
 // catch 404 and forward to error handler

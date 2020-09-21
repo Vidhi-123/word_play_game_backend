@@ -16,6 +16,10 @@ var rating={
     getWordStarByWordUserId(word_id,user_id,callback)
     {
         return db.query("SELECT star FROM rating_table WHERE word_id=? and user_id=?",[word_id,user_id],callback);
+    },
+    DeleteWordById(word_id,callback)
+    {
+        return db.query("delete from rating_table where word_id=?",[word_id],callback);
     }
 };
 

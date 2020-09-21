@@ -17,7 +17,7 @@ var word={
         return db.query("insert into word_table (id,word_name,is_adult,date_time) values(?,?,?,?)",[item.id,item.word_name,item.is_adult,today],callback);
     },
     deleteWord:function(id,callback){
-        return db.query("delete from word_table where w_id=?",[id],callback);
+        return db.query("delete from word_table where word_id=?",[id],callback);
     },
     getCntAvgByWorduser:function(id,callback){
         return db.query("select avg(star) 'average_rating' from rating_table where  word_id in (SELECT word_id from user_word_table where user_id=?)",[id],callback);
@@ -54,6 +54,14 @@ var word={
     getWordIdRatingByUserId:function(user_id,callback)
     {
         return db.query("select AVG(r.star) 'rating',w.word_id from rating_table r,user_word_table w where r.word_id=w.word_id and w.user_id=? GROUP by w.word_id ",[user_id],callback)
+    },
+    getwordsAdmin:function(callback)
+    {
+        return db.query("select w.*,u.name,AVG(r.star)'average_rating' from user_word_table uw,word_table w,user_table u,rating_table r where uw.user_id=u.user_id and uw.word_id=w.word_id and uw.word_id=r.word_id GROUP by r.word_id",callback);
+    },
+    getWordsAdminId:function(word_id,callback)
+    {
+        return db.query("select u.name,r.star from rating_table r,user_table u where u.user_id=r.user_id and r.word_id=?",[word_id],callback);
     }
     
 };

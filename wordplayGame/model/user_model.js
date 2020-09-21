@@ -21,7 +21,20 @@ var user={
     updateCoin:function(user_id,coins,callback)
     {
         return db.query("update user_table set coins=? where user_id=?",[coins,user_id],callback)
+    },
+    userAdmin:function(callback)
+    {
+        return db.query("select u.*,count(DISTINCT uw.word_id)'words_count',AVG(star)'average_rating' from user_table u,user_word_table uw,rating_table r where u.user_id=uw.user_id and uw.word_id=r.word_id group by uw.user_id ",callback);
+    },
+    userViewAdmin:function(user_id,callback)
+    {
+        return db.query("select w.word_name,AVG(r.star)'average_rating',count(r.user_id)'rater_count' from word_table w,user_word_table uw,rating_table r where uw.word_id=w.word_id and uw.word_id=r.word_id and uw.user_id=? group by r.word_id",[user_id],callback);
+    },
+    disableUser:function(user_id,callback)
+    {
+        return db.query("update user_table set is_enabled=0 where user_id=?",[user_id],callback);
     }
+
 
 };
 module.exports=user;
